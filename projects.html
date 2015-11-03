@@ -8,9 +8,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="../../favicon.ico">
 
-    <title>Projects</title>
+    <title>Narrow Jumbotron Template for Bootstrap</title>
 
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
@@ -20,12 +20,9 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-    
-	<!-- Custom styles for this template -->
-    <link href="css/dashboard.css" rel="stylesheet">
-	
-	<!-- Custom styles for this template -->
-    <link href="css/blog.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="jumbotron-narrow.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -40,52 +37,34 @@
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Brion Rogers</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item active" href="#">Home</a>
+          <a class="blog-nav-item" href="#">New features</a>
+          <a class="blog-nav-item" href="#">Press</a>
+          <a class="blog-nav-item" href="#">New hires</a>
+          <a class="blog-nav-item" href="#">About</a>
+        </nav>
       </div>
-    </nav>
+    </div>
 
-    <div class="container-fluid">
+    <div class="container">
+
+      <div class="blog-header">
+        <h1 class="blog-title">The Bootstrap Blog</h1>
+        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+      </div>
+
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Projects <span class="sr-only">(current)</span></a></li>
-            <li><a href="blog.html">Blog</a></li>
-			<li><a href="www.github.com/brionrogers">Github</a></li>
-			<li><a href="resume.html">Resume</a></li>
-			<li><a href="about.html">About</a></li>
-          </ul>
-        </div>
-        
-		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="overflow-x:hidden; overflow-y:scroll">
-          <h1 class="page-header">Projects</h1>
-
-  
-          <h3 class="sub-header">TFS TimeTracker</h2>
-		  <div class="row">
 
         <div class="col-sm-8 blog-main">
 
           <div class="blog-post">
-            <h2 class="blog-post-title">TFS Time Tracker</h2>
-            <p class="blog-post-meta">January 1, 2014 by <a href="about.html">Brion</a></p>
+            <h2 class="blog-post-title">Sample blog post</h2>
+            <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
 
-            <p>This is an application that can track time spent developing and update a Team Foundation Server work item to reflect that. This application uses the Microsoft TFS Java api (which is what Team Explorer Everywhere is built with) in order to facilitate communication
-			between a user and a remote TFS server.</p>
+            <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
             <hr>
             <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
             <blockquote>
@@ -183,18 +162,20 @@
 
       </div><!-- /.row -->
 
-          
-        </div>
-      </div>
-    </div>
+    </div><!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="../../assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
