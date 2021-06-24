@@ -17,9 +17,93 @@ For example, in this series I will describe an AWS organization with three accou
 Pitfall: the topology of your terraform project should be thoughtful and is specific to your use case
 
 Let's first create three additional resources manually:
-1. S3 bucket for our remote state files
-2. A DynamoDB table to implement locking of state files
-3. An administative IAM role from which we can make changes to our root organizational account but also assume rules in our non-production/production accounts in order to provision resources there too
+1. An administative IAM role from which we can make changes to our root organizational account but also assume rules in our non-production/production accounts in order to provision resources there too
+2. S3 bucket for our remote state files
+3. A DynamoDB table to implement locking of state files
+
+## Create an IAM user and policy to use with terraform
+
+As stated in the [IAM user guide][aws-root-user], it is best practice to avoid using the root account except for very specific actions which require intervention from the root account (there are some billing and support changes that require the root account for example). To that end, we will create an IAM user whose access keys we will configure locally to authenticate API calls made to AWS by terraform.
+
+1. Navigate to the IAM console:
+![Search For IAM Service](/assets/iam_aws_console.PNG)
+2. Select `Policies`
+![Add Users](/assets/policies.PNG)
+3. Select `Create policy` and on the next screen toggle the `JSON` tab
+4. We will create a basic administrator policy that will allow us to assume a role in our production and non-production accounts as well as perform actions on some to-be-created S3 buckets and a dynamodb table:
+{% highlight json %}
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "sts:AssumeRole"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:iam::<non-production account number>:role/non-production_terraform_administrator_role"
+        },
+        {
+            "Action": [
+                "sts:AssumeRole"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:iam::<production account number>:role/production_terraform_administrator_role"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": "arn:aws:s3:::root-organizational-tfstate"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": "arn:aws:s3:::non-production-tfstate"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:*"
+            ],
+            "Resource": "arn:aws:dynamodb:us-east-1:<root organization account number>:table/terraform-remote-state-lock"
+        },		
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeVpcs"
+            ],
+            "Resource": "arn:aws:ec2::<non-production account number>:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeRegions"
+            ],
+            "Resource": "arn:aws:ec2::<production account number>:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+{% endhighlight %}
+
+3. Select `Users`
+![Select Users](/assets/users.PNG)
 
 ## Create S3 bucket for remote state files
 
@@ -38,5 +122,6 @@ Let us begin preparing out organization master account for use with terraform. L
 10. Create bucket
 
 [aws-new-account]: https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/
+[aws-root-user]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html
 [terraform-install]: https://learn.hashicorp.com/tutorials/terraform/install-cli?in=terraform/aws-get-started
 [terraform-data]: https://www.terraform.io/docs/language/state/sensitive-data.html
